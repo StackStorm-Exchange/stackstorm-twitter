@@ -34,20 +34,20 @@ You can also use dynamic values from the datastore. See the
 To obtain API credentials, you need to first register your application on the
 [Twitter Application Management](https://apps.twitter.com/) page.
 
-![Step 1](/_images/twitter_create_app.png)
+![Step 1](/etc/twitter_create_app.png)
 
 After you have done that, go to the `Keys and Access Tokens` tab where you can
 find your consumer key and secret. On the same page you can also generate an
 access token (click on the ``Create my access token`` button).
 
-![Step 2](/_images/twitter_obtain_consumer_key.png)
+![Step 2](/etc/twitter_obtain_consumer_key.png)
 
 For the sensor a "Read only" token is sufficient, but for the action you need
 to use a token with a "Read and Write" access.
 
-![Step 3](/_images/twitter_create_access_token.png)
+![Step 3](/etc/twitter_create_access_token.png)
 
-![Step 4](/_images/twitter_obtain_access_token.png)
+![Step 4](/etc/twitter_obtain_access_token.png)
 
 ## Sensors
 
