@@ -9,3 +9,18 @@
       type: "string"
       description: "New status (tweet message)."
       required: true
+    media:
+      type: "array"
+      items:
+        type: "string"
+      description: >
+        Media to post with the status. These can either be local filenames, or
+        http/s URLs. If the item is a URL, the data will be downloaded to
+        a temporary file on the local disk, the uploaded to Twitter.
+        Examples:
+          # path on local filesystem
+          ['/opt/data/image.png']
+
+          # http/s URL that will be downloaded, then uploaded to twitter
+          ['https://imgur.com/abc.png']
+      default: []
