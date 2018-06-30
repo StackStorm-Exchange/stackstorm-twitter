@@ -1,4 +1,3 @@
-from tempfile import NamedTemporaryFile
 from twitter import Twitter
 from twitter import OAuth
 from twython import Twython
