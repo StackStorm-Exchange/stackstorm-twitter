@@ -66,6 +66,27 @@ the config. When a matching Tweet is found, a trigger is dispatched.
 * ``direct_message`` - Action to direct message a user.
 * ``follow`` - Action to follow a user.
 
+### Updating Status with Media (Pictures)
+
+The ``update_status`` action supports uploading of media (pictures specifically)
+along with your textual status update. This is accomplished by passing
+either the path to a local file, or a ``http/s`` URL to the ``media`` parameter.
+``media`` is an ``array`` and can be used to uploaded multiple media in a single
+tweet.
+
+Example(s):
+
+``` shell
+# upload a single image from the filesystem
+st2 run twitter.update_status status="Check out my local file" media=
+
+# upload a single image from a URL
+st2 run twitter.update_status status="Check out this picutre on the internet" media="https://apod.nasa.gov/apod/image/1806/_SSH1593jsm1024.jpg"
+
+# upload multiple images
+st2 run twitter.update_status status="Check out these pics" media='["/opt/data/picture.png", "https://apod.nasa.gov/apod/image/1806/_SSH1593jsm1024.jpg"]'
+```
+
 ## Rules
 
 ### relay_tweet_to_slack
