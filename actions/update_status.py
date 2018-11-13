@@ -36,14 +36,31 @@ class UpdateStatusAction(Action):
                 data = f.read()
         return data
 
-    def run(self, status, media):
+    def run(self, status, media, account=""):
+
+        if not account:
+            consumer_key = self.config['accounts'][0]['consumer_key']
+            consumer_secret = self.config['accounts'][0]['consumer_secret']
+            access_token = self.config['accounts'][0]['access_token']
+            access_token_secret = self.config['accounts'][0]['access_token_secret']
+        else:
+            for config_account in self.config['accounts']:
+                if config_account['name'] == account:
+                    consumer_key = config_account['consumer_key']
+                    consumer_secret = config_account['consumer_secret']
+                    access_token = config_account['access_token']
+                    access_token_secret = config_account['access_token_secret']
+                    break
+            else:
+                raise Exception("Unable to find referenced account in config")
+
         if media:
             # use twython.Twython for media updates
             # twitter.Twitter has a bug that prevents media from being uploaded
-            client = Twython(self.config['consumer_key'],
-                             self.config['consumer_secret'],
-                             self.config['access_token'],
-                             self.config['access_token_secret'])
+            client = Twython(consumer_key,
+                             consumer_secret,
+                             access_token,
+                             access_token_secret)
             media_ids = []
             for m in media:
                 # get data for media path (or download of it's a url)
@@ -60,10 +77,10 @@ class UpdateStatusAction(Action):
         else:
             # use twitter.Twitter for regular status updates
             auth = OAuth(
-                token=self.config['access_token'],
-                token_secret=self.config['access_token_secret'],
-                consumer_key=self.config['consumer_key'],
-                consumer_secret=self.config['consumer_secret']
+                token=access_token,
+                token_secret=access_token_secret,
+                consumer_key=consumer_key,
+                consumer_secret=consumer_secret
             )
             client = Twitter(auth=auth)
             client.statuses.update(status=status)

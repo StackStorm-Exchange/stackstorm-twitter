@@ -1,24 +1,4 @@
 ---
-  consumer_key:
-    description: "Your consumer key."
-    type: "string"
-    required: true
-    secret: true
-  consumer_secret:
-    description: "Your consumer secret."
-    type: "string"
-    required: true
-    secret: true
-  access_token:
-    description: "Your access token."
-    type: "string"
-    required: true
-    secret: true
-  access_token_secret:
-    description: "Your access token secret."
-    type: "string"
-    required: true
-    secret: true
   count:
     description: "Number of latest tweets matching criteria to receive. Default 30"
     type: "integer"
@@ -36,3 +16,38 @@
     items:
       type: "string"
     required: true
+  accounts:
+    description: "List of twitter accounts"
+    type: "array"
+    minItems: 1
+    items:
+      type: "object"
+      properties:
+        name:
+          description: "Identifier for this account"
+          type: "string"
+          required: true
+          secret: true
+        consumer_key:
+          description: "Your consumer key."
+          type: "string"
+          required: true
+          secret: true
+        consumer_secret:
+          description: "Your consumer secret."
+          type: "string"
+          required: true
+          secret: true
+        access_token:
+          description: "Your access token."
+          type: "string"
+          required: true
+          secret: true
+        access_token_secret:
+          description: "Your access token secret."
+          type: "string"
+          required: true
+          secret: true
+    required: true
+
+

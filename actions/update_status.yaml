@@ -24,3 +24,7 @@
           # http/s URL that will be downloaded, then uploaded to twitter
           ['https://imgur.com/abc.png']
       default: []
+    account:
+      type: "string"
+      description: "Account to tweet from. Defaults to first present in config."
+      required: false

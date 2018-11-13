@@ -1,5 +1,10 @@
 # Change Log
 
+# 0.5.0
+
+- Added support for multiple accounts in the pack config
+  Contributed by Matt Oswalt (Juniper Networks)
+
 # 0.4.0
 
 - Added ability to upload media (pictures) in the `update_status` action.
