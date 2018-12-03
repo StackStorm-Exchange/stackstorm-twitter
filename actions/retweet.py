@@ -40,34 +40,23 @@ class UpdateStatusAction(Action):
 
         rt_accounts = []
 
-        if not accounts:
-            rt_accounts.append(
-                {
-                    "consumer_key": self.config['accounts'][0]['consumer_key'],
-                    "consumer_secret": self.config['accounts'][0]['consumer_secret'],
-                    "access_token": self.config['accounts'][0]['access_token'],
-                    "access_token_secret": self.config['accounts'][0]['access_token_secret']
-                }
-            )
-        else:
+        # Iterate over provided list of accounts to retweet from
+        for account in accounts:
 
-            # Iterate over provided list of accounts to retweet from
-            for account in accounts:
-
-                # Iterate over accounts in config, making sure the requested account exists
-                for config_account in self.config['accounts']:
-                    if config_account['name'] == account:
-                        rt_accounts.append(
-                            {
-                                "consumer_key": config_account['consumer_key'],
-                                "consumer_secret": config_account['consumer_secret'],
-                                "access_token": config_account['access_token'],
-                                "access_token_secret": config_account['access_token_secret']
-                            }
-                        )
-                        break
-                else:
-                    raise Exception("Unable to find referenced account in config")
+            # Iterate over accounts in config, making sure the requested account exists
+            for config_account in self.config['accounts']:
+                if config_account['name'] == account:
+                    rt_accounts.append(
+                        {
+                            "consumer_key": config_account['consumer_key'],
+                            "consumer_secret": config_account['consumer_secret'],
+                            "access_token": config_account['access_token'],
+                            "access_token_secret": config_account['access_token_secret']
+                        }
+                    )
+                    break
+            else:
+                raise Exception("Unable to find referenced account in config")
     
         # Iterate over final list and retweet from each account
         for account in rt_accounts:
