@@ -54,6 +54,8 @@ class UpdateStatusAction(Action):
             else:
                 raise Exception("Unable to find referenced account in config")
 
+        tweet_data = {}
+
         if media:
             # use twython.Twython for media updates
             # twitter.Twitter has a bug that prevents media from being uploaded
@@ -73,7 +75,8 @@ class UpdateStatusAction(Action):
                 media_ids.append(response['media_id'])
 
             # send tweet with uploaded media
-            client.update_status(status=status, media_ids=media_ids)
+            status = client.update_status(status=status, media_ids=media_ids)
+            tweet_data['status_id'] = status['id_str']
         else:
             # use twitter.Twitter for regular status updates
             auth = OAuth(
@@ -83,6 +86,7 @@ class UpdateStatusAction(Action):
                 consumer_secret=consumer_secret
             )
             client = Twitter(auth=auth)
-            client.statuses.update(status=status)
+            status = client.statuses.update(status=status)
+            tweet_data['status_id'] = status['id_str']
 
-        return True
+        return (True, tweet_data)
