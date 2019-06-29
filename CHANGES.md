@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.4.2
+
+- Python3 StringIO compatibility fix
+
 ## 0.4.1
 
 - Bump twython version from 3.4.0 to 3.7.0
