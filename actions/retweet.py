@@ -1,11 +1,9 @@
 from twitter import Twitter
 from twitter import OAuth
-from twython import Twython
 
-import base64
 import requests
 import os
-import StringIO
+from io import StringIO
 
 from st2common.runners.base_action import Action
 
@@ -20,7 +18,7 @@ __all__ = [
 class UpdateStatusAction(Action):
 
     def download_url(self, url):
-        data_buffer = StringIO.StringIO()
+        data_buffer = StringIO()
         req = requests.get(url, stream=True)
         for chunk in req.iter_content(chunk_size=DOWNLOAD_CHUNK_SIZE_BYTES):
             data_buffer.write(chunk)
@@ -57,7 +55,7 @@ class UpdateStatusAction(Action):
                     break
             else:
                 raise Exception("Unable to find referenced account in config")
-    
+
         # Iterate over final list and retweet from each account
         for account in rt_accounts:
             auth = OAuth(

@@ -49,5 +49,7 @@
           required: true
           secret: true
     required: true
-
-
+  default_account:
+    description: "Name of the account to use as a default for new posts"
+    type: "string"
+    required: true

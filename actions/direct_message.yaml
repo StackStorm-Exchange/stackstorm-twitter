@@ -13,3 +13,7 @@
       type: "string"
       description: "The message to send."
       required: true
+    account:
+      type: "string"
+      description: "Account to send direct message from. Overrides default account in config."
+      required: false

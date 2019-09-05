@@ -10,3 +10,4 @@ accounts:
   consumer_secret: "your consumer secret"
   access_token: "your access token"
   access_token_secret: "your access token secret"
+default_account: "StackStorm"

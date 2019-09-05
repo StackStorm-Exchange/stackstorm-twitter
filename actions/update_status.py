@@ -7,7 +7,7 @@ from twitter import Twitter
 from twitter import OAuth
 from twython import Twython
 
-
+from lib import get_twitter_tokens
 from st2common.runners.base_action import Action
 
 # 1 MB chunks
@@ -39,21 +39,9 @@ class UpdateStatusAction(Action):
 
     def run(self, status, media, account=""):
 
-        if not account:
-            consumer_key = self.config['accounts'][0]['consumer_key']
-            consumer_secret = self.config['accounts'][0]['consumer_secret']
-            access_token = self.config['accounts'][0]['access_token']
-            access_token_secret = self.config['accounts'][0]['access_token_secret']
-        else:
-            for config_account in self.config['accounts']:
-                if config_account['name'] == account:
-                    consumer_key = config_account['consumer_key']
-                    consumer_secret = config_account['consumer_secret']
-                    access_token = config_account['access_token']
-                    access_token_secret = config_account['access_token_secret']
-                    break
-            else:
-                raise Exception("Unable to find referenced account in config")
+        consumer_key, consumer_secret, access_token, access_token_secret = get_twitter_tokens(
+            self.config, account
+        )
 
         tweet_data = {}
 
