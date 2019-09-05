@@ -9,7 +9,7 @@ def get_twitter_tokens(config, account):
         account = default_account
 
     for config_account in config['accounts']:
-        if config_account['name'] == default_account:
+        if config_account['name'] == account:
             consumer_key = config_account['consumer_key']
             consumer_secret = config_account['consumer_secret']
             access_token = config_account['access_token']
