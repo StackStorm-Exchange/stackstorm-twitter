@@ -25,7 +25,7 @@ class TwitterStreamHandler(TwythonStreamer):
             self._callback(tweet=data)
 
     def on_error(self, status_code, data):
-        print status_code
+        print('Got error: %s (code=%s)' % (data, status_code))
 
 
 class TwitterStreamSensor(Sensor):

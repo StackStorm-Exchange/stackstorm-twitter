@@ -1,11 +1,14 @@
 ---
 ref: twitter
 name : twitter
-description : st2 content pack containing twitter integrations
+description : Monitor and send Tweets
 keywords:
   - twitter
   - social media
   - social networks
-version: 0.5.0
+version: 0.4.2
+python_versions:
+  - "2"
+  - "3"
 author : StackStorm, Inc.
 email : info@stackstorm.com
