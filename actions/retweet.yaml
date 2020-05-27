@@ -1,0 +1,15 @@
+---
+  name: "retweet"
+  runner_type: "python-script"
+  description: "Retweet an existing tweet"
+  enabled: true
+  entry_point: "retweet.py"
+  parameters:
+    tweet_id:
+      type: "string"
+      description: "Tweet ID to retweet"
+      required: true
+    accounts:
+      type: "array"
+      description: "Account(s) to tweet from. Defaults to first present in config."
+      required: false

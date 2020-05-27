@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.4.3
+
+- Added support for multiple accounts in the pack config
+  Contributed by Matt Oswalt (Juniper Networks)
+
 ## 0.4.2
 
 - Python3 StringIO compatibility fix

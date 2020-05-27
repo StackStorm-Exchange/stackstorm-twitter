@@ -9,3 +9,7 @@
       type: "string"
       description: "Screen name of the user to follow."
       required: true
+    account:
+      type: "string"
+      description: "Account to follow from. Overrides default account in config."
+      required: false

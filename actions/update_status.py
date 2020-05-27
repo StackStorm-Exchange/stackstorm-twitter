@@ -7,7 +7,7 @@ from twitter import Twitter
 from twitter import OAuth
 from twython import Twython
 
-
+from lib import get_twitter_tokens
 from st2common.runners.base_action import Action
 
 # 1 MB chunks
@@ -37,14 +37,21 @@ class UpdateStatusAction(Action):
                 data = f.read()
         return data
 
-    def run(self, status, media):
+    def run(self, status, media, account=""):
+
+        consumer_key, consumer_secret, access_token, access_token_secret = get_twitter_tokens(
+            self.config, account
+        )
+
+        tweet_data = {}
+
         if media:
             # use twython.Twython for media updates
             # twitter.Twitter has a bug that prevents media from being uploaded
-            client = Twython(self.config['consumer_key'],
-                             self.config['consumer_secret'],
-                             self.config['access_token'],
-                             self.config['access_token_secret'])
+            client = Twython(consumer_key,
+                             consumer_secret,
+                             access_token,
+                             access_token_secret)
             media_ids = []
             for m in media:
                 # get data for media path (or download of it's a url)
@@ -57,16 +64,18 @@ class UpdateStatusAction(Action):
                 media_ids.append(response['media_id'])
 
             # send tweet with uploaded media
-            client.update_status(status=status, media_ids=media_ids)
+            status = client.update_status(status=status, media_ids=media_ids)
+            tweet_data['status_id'] = status['id_str']
         else:
             # use twitter.Twitter for regular status updates
             auth = OAuth(
-                token=self.config['access_token'],
-                token_secret=self.config['access_token_secret'],
-                consumer_key=self.config['consumer_key'],
-                consumer_secret=self.config['consumer_secret']
+                token=access_token,
+                token_secret=access_token_secret,
+                consumer_key=consumer_key,
+                consumer_secret=consumer_secret
             )
             client = Twitter(auth=auth)
-            client.statuses.update(status=status)
+            status = client.statuses.update(status=status)
+            tweet_data['status_id'] = status['id_str']
 
-        return True
+        return (True, tweet_data)
